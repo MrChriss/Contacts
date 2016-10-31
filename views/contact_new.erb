@@ -1,0 +1,46 @@
+<h3>Add new contact:</h3>
+<form action="/add/contact/new" method="POST">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col">
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" name="first_name" value="<%= params[:first_name] %>" maxlength="35" />
+        <label for="first_name" class="mdl-textfield__label">First Name:</label>
+      </div>
+      <br />
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" name="last_name" value="<%= params[:last_name] %>" maxlength="35" />
+        <label for="last_name" class="mdl-textfield__label">Last Name:</label>
+      </div>
+      <br />
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" type="text" name="number" value="<%= params[:number] %>" maxlength="10" />
+        <label for="number" class="mdl-textfield__label">Number:</label>
+        <span class="mdl-textfield__error">Has to be a number!</span>
+      </div>
+      <br />
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" name="email" value="<%= params[:email] %>" maxlength="40" />
+        <label for="email" class="mdl-textfield__label">Email:</label>
+      </div>
+      <br />
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Add contact</button>
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col" style="padding-left: 3em">
+      <% unless @storage.all_groups.empty? %>
+        <h4>Add to Groups:</h4>
+        <% @storage.all_groups.each do |group| %>
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="<%= group[:name] %>">
+            <input class="mdl-checkbox__input" type="checkbox" id="<%= group[:name] %>" name="<%= group[:name] %>" />
+            <span class="mdl-checkbox__label"><%= group[:name] %></span>
+          </label>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,10 @@
+<h3>Add new group:</h3>
+
+<form action="/add/group/new" method="POST">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" name="group" value="<%= params[:group] %>" maxlength="20" />
+    <label for="group" class="mdl-textfield__label">Group Name:</label>
+  </div>
+
+  <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Add group</button>
+</form>

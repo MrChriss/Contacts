@@ -1,0 +1,61 @@
+<h3>Edit contact: <%= full_name(@contact) %>.</h3>
+<form action="/contacts/<%= full_name(@contact) %>/edit" method="POST">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col">
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" name="first_name" value="<%= @contact[:first_name] %>" maxlength="35" />
+        <label for="first_name" class="mdl-textfield__label">First Name:</label>
+      </div>
+      <br />
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" name="last_name" value="<%= @contact[:last_name] %>" maxlength="35" />
+        <label for="last_name" class="mdl-textfield__label">Last Name:</label>
+      </div>
+      <br />
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" type="text" name="number" value="<%= @contact[:number] %>" maxlength="10" />
+        <label for="number" class="mdl-textfield__label">Number:</label>
+        <span class="mdl-textfield__error">Has to be a number!</span>
+      </div>
+      <br />
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="email" name="email" value="<%= @contact[:email] %>" maxlength="40" />
+        <label for="email" class="mdl-textfield__label">Email:</label>
+      </div>
+      <br />
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Save Changes</button>
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col">
+      <% unless @storage.all_groups.empty? %>
+        <h4>Manage groups:</h4>
+        <% if @contact_groups.empty? %>
+          <p>Contact is currently not in any group.</p>
+        <% end %>
+          <% @storage.all_groups.each do |group| %>
+            <% if @contact_groups.include? group[:name] %>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="<%= group[:name] %>">
+                  <input class="mdl-checkbox__input" type="checkbox" id="<%= group[:name] %>" name="<%= group[:name] %>" checked />
+                  <span class="mdl-checkbox__label"><%= group[:name] %></span>
+                </label>
+            <% else %>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="<%= group[:name] %>">
+                <input class="mdl-checkbox__input" type="checkbox" id="<%= group[:name] %>" name="<%= group[:name] %>" />
+                <span class="mdl-checkbox__label"><%= group[:name] %></span>
+              </label>
+            <% end %>
+          <% end %>
+      <% end %>
+    </div>
+
+    <br /><br /><br />
+  </div>
+</form>
+<form action="/contacts/<%= full_name(@contact) %>/delete" method="POST">
+  <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Delete Contact</button>
+</form>

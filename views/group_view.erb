@@ -1,0 +1,32 @@
+<% content_for :home_page do %>
+  <% if @group.empty? %>
+    <h3>There are no contacts in group: "<%= params[:name] %>".</h3>
+  <% else %>
+    <h3>Group: <%= params[:name] %></h3>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">First Name</th>
+          <th class="mdl-data-table__cell--non-numeric">Last Name</th>
+          <th>Phone Number</th>
+          <th class="mdl-data-table__cell--non-numeric">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @group.each do |contact| %>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><%=  contact[:first_name] %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%=  contact[:last_name] %></td>
+            <td><%=  contact[:number] %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%=  contact[:email] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br />
+  <% end %>
+  <form action="/groups/<%= params[:name] %>/delete" method="POST">
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Delete Group</button>
+  </form>
+<% end %>

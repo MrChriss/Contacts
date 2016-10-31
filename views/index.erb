@@ -1,0 +1,59 @@
+<% content_for :home_page do %>
+  <% if @storage.all_contacts.empty? %>
+    <div class="mdl-cell mdl-cell--8-col">
+      <div class="mdl-card mdl-shadow--16dp">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">Welcome!</h2>
+        </div>
+        <div class="mdl-card__media">
+          <img src="celebration.jpg">
+        </div>
+        <div class="mdl-card__supporting-text">
+          You currently have no contacts.
+          Try creating some contacts.
+          You can create and manage groups as well.
+        </div>
+        <div class="mdl-card__actions">
+          <a href="/add/contact">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="float: right">
+              Add Contact
+            </button>
+          </a>
+          <a href="/add/group">
+            <button class="mdl-button mdl-button--raised mdl-js-button mdl-button--primary">
+              Add Group
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <h3>All contacts:</h3>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">First Name</th>
+          <th class="mdl-data-table__cell--non-numeric">Last Name</th>
+          <th>Phone Number</th>
+          <th class="mdl-data-table__cell--non-numeric">Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @storage.all_contacts.each do |contact| %>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><%=  contact[:first_name] %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%=  contact[:last_name] %></td>
+            <td><%=  contact[:number] %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%=  contact[:email] %></td>
+            <td>
+              <a href="/contacts/<%= full_name(contact)%>">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">EDIT</button>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

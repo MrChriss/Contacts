@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Contacts</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../mdl/material.min.css">
+    <script defer src="../mdl/material.min.js"></script>
+  </head>
+  <body>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+                mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">
+            <h4>Simple contacts application</h4>
+          </span>
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+
+          <% unless @storage.all_groups.empty? %>
+            <p class="mdl-layout__tab">Groups:</p>
+            <% @storage.all_groups.each do |group| %>
+              <a class="mdl-layout__tab" href="/groups/<%= group[:name] %>"><%= group[:name] %></a>
+            <% end %>
+          <% end %>
+        </div>
+      </header>
+
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Contacts</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/">Home</a>
+          <a class="mdl-navigation__link" href="/add/contact">Add Contact</a>
+          <a class="mdl-navigation__link" href="/add/group">Add Group</a>
+        </nav>
+      </div>
+
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col">
+              <% if session[:message] %>
+                <span class="mdl-chip">
+                  <span class="mdl-chip__text" style="text-align: center; opacity: 0.7"><%= session.delete(:message) %></span>
+                </span>
+              <% end %>
+            </div>
+
+            <% unless yield.empty? %>
+              <div class="mdl-cell mdl-cell--8-col mdl-shadow--3dp" style="padding: 7em">
+                <%== yield %>
+              </div>
+            <% end %>
+
+            <div class="mdl-cell mdl-cell--8-col">
+              <%== yield_content :home_page %>
+            </div>
+
+            <div class="mdl-cell mdl-cell--0-col"></div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
