@@ -1,9 +1,6 @@
 require 'sequel'
 
-# DB = Sequel.connect(adapter: 'postgres', database: 'contacts')
-# Sequel.connect(ENV['DATABASE_URL']) ||
-DB = Sequel.connect(ENV['DATABASE_URL'] || 'postgres://mrchriss:961post962gres@localhost/contacts')
-
+DB = Sequel.connect(ENV['DATABASE_URL'] || {adapter: 'postgres', database: 'contacts'})
 
 # data storage api for 'simple contacts application'
 class DataPersistence

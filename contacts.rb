@@ -18,7 +18,7 @@ end
 helpers do
   # extracts the contact credentials from request.params hash
   def contact_credentials(data)
-    data.values[0..3]
+    data.values[0..3].map!(&:strip)
   end
 
   # extracts group data from request.params hash
@@ -57,7 +57,7 @@ get '/add/group' do
 end
 
 post '/add/group/new' do
-  name = params[:group]
+  name = params[:group].strip
 
   if name.empty?
     session[:message] = 'Input is empty.'

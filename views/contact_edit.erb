@@ -4,13 +4,13 @@
     <div class="mdl-cell mdl-cell--6-col">
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" name="first_name" value="<%= @contact[:first_name] %>" maxlength="35" />
+        <input class="mdl-textfield__input" pattern="^[A-Za-z][A-Za-z0-9]*$" type="text" name="first_name" value="<%= @contact[:first_name] %>" maxlength="35" />
         <label for="first_name" class="mdl-textfield__label">First Name:</label>
       </div>
       <br />
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" name="last_name" value="<%= @contact[:last_name] %>" maxlength="35" />
+        <input class="mdl-textfield__input" pattern="^[A-Za-z][A-Za-z0-9]*$" type="text" name="last_name" value="<%= @contact[:last_name] %>" maxlength="35" />
         <label for="last_name" class="mdl-textfield__label">Last Name:</label>
       </div>
       <br />
