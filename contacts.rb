@@ -31,8 +31,8 @@ helpers do
   end
 
   def non_numeric?(inpt)
-      !(inpt.to_i.to_s == inpt)
-      !('0' + inpt.to_i.to_s == inpt) if inpt.chars.first == '0'
+    !(inpt.to_i.to_s == inpt)
+    !('0' + inpt.to_i.to_s == inpt) if inpt.chars.first == '0'
   end
 
   def full_name(name)
